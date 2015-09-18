@@ -35,7 +35,7 @@ function getComputerMove(move) {
     return move || randomPlay();
 }
 
-var winner;
+var winner; // [!] I moved this variable outside of the scope of the function getWinner in order to reference its value in the playToFive function
 
 function getWinner(playerMove,computerMove) {    
     // Write code that will set winner to either 'player', 'computer', or 'tie' based on the values of playerMove and computerMove.
@@ -60,22 +60,17 @@ function playToFive() {
     var computerWins = 0;
     // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
     var round = 0;
-
-    while (playerWins < 5 && computerWins < 5) {
-
-    round += 1;
-    console.log("Round " + round + ":");
-
-    getWinner(getPlayerMove(),getComputerMove());
-
-    if (winner === 'player') {
-        playerWins++; console.log("Player's score is now " + playerWins + ".");
-    } else if (winner === 'computer') {
-        computerWins++; console.log("Computer's score is now " + computerWins + ".");
-    } else { 
+    while (playerWins < 5 && computerWins < 5) { // plays a new round until computer or player has 5 wins
+    round += 1; console.log("Round " + round + ":"); // logs the current round to the console
+    getWinner(getPlayerMove(),getComputerMove()); // executes the round and returns the winner
+        if (winner === 'player') { // updates score
+            playerWins++; console.log("Player's score is now " + playerWins + ".");
+        } else if (winner === 'computer') {
+            computerWins++; console.log("Computer's score is now " + computerWins + ".");
+        } else { 
         console.log("Play again.");
+        }
     }
 }
-}
 
-playToFive();
+playToFive(); // calls playToFive function to begin game
